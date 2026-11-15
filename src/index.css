@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background-color: #E6ECE6;
+    color: #111A14;
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: clip;
+  }
+}
+
+@layer utilities {
+  .glass-surface {
+    @apply bg-white/15 backdrop-blur-xl border border-white/25 shadow-2xl;
+  }
+
+  .glass-dark {
+    @apply bg-[#142218]/65 backdrop-blur-xl border border-white/20 shadow-2xl;
+  }
+
+  .editorial-serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+  }
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E6ECE6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9FB0A2;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #243829;
+}
+
+/* Mosaic pixel grid overlay transition for Signature MistPeak Room Accordion */
+@keyframes mosaicDissolve {
+  0% {
+    opacity: 1;
+    backdrop-filter: blur(20px) saturate(1.25);
+    transform: scale(1.06);
+  }
+  45% {
+    opacity: 0.72;
+    backdrop-filter: blur(8px) saturate(1.08);
+  }
+  100% {
+    opacity: 0;
+    backdrop-filter: blur(0px) saturate(1);
+    transform: scale(1);
+  }
+}
+
+.mosaic-shimmer-overlay {
+  background-image:
+    linear-gradient(to right, rgba(230, 236, 230, 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(230, 236, 230, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.38), rgba(20, 34, 24, 0.28));
+  background-size: 26px 26px, 26px 26px, 100% 100%;
+  animation: mosaicDissolve 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+
+/* Hotspot subtle pulse ring */
+@keyframes hotspotPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  70% {
+    transform: scale(2.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.35);
+    opacity: 0;
+  }
+}
+
+.hotspot-ring {
+  animation: hotspotPulse 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+/* Cinematic slow Ken Burns breathing for Hero & active photo frames */
+@keyframes kenBurnsSlow {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.07) translate3d(-1%, -0.8%, 0);
+  }
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+.animate-ken-burns {
+  animation: kenBurnsSlow 20s ease-in-out infinite;
+}
+
+/* Gentle atmospheric float for HUD pills and cards */
+@keyframes floatGentle {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 6s ease-in-out infinite;
+}
+
+/* Foliage gentle highland breeze sway */
+@keyframes leafSway {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(1.8deg) translateY(-3px);
+  }
+}
+
+.animate-leaf-sway {
+  animation: leafSway 7s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* 3D flip word container */
+.perspective-1000 {
+  perspective: 1000px;
+}
