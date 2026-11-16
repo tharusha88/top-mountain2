@@ -140,7 +140,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-        className="rounded-[32px] bg-[#F7F9F6] px-5 py-14 md:px-12 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)]"
+        className="rounded-[24px] md:rounded-[32px] bg-[#F7F9F6] px-5 py-14 md:px-12 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)]"
       >
         <div className="mb-10 flex items-center justify-between">
           <span className="inline-block rounded-full bg-[#E6ECE6] px-3.5 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-[#243829]">
@@ -149,7 +149,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
           <span className="text-xs text-[#8A9A8E]">topmountainresort.com</span>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           {/* Left Column: Address, Hotlines & Highland Basecamp Badges */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -189,11 +189,11 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
                     Direct Reservation Hotlines
                   </p>
                   <p className="mt-0.5 font-medium text-[#111A14] flex flex-wrap gap-x-3 gap-y-1">
-                    <a href="tel:+94777368264" className="hover:underline">
+                    <a href="tel:+94777368264" className="py-1 hover:underline">
                       +94 77 736 8264
                     </a>
                     <span className="text-[#8A9A8E]">|</span>
-                    <a href="tel:+94572227143" className="hover:underline">
+                    <a href="tel:+94572227143" className="py-1 hover:underline">
                       +94 57 222 7143
                     </a>
                   </p>
@@ -320,7 +320,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
                     style={{
                       transform: `translate3d(${magOffset.x}px, ${magOffset.y}px, 0)`,
                     }}
-                    className="group inline-flex items-center gap-3 rounded-full bg-[#142218] px-7 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#F4F6F3] shadow-xl hover:bg-[#243829] transition-[background-color,transform] duration-200"
+                    className="group w-full sm:w-auto justify-center inline-flex items-center gap-3 rounded-full bg-[#142218] px-7 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#F4F6F3] shadow-xl hover:bg-[#243829] transition-[background-color,transform] duration-200"
                   >
                     <span>Send Inquiry</span>
                     <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -335,12 +335,14 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
       {/* Atmospheric Finale Banner with Drifting Mist Clouds */}
       <div
         ref={bannerRef}
-        className="relative h-[420px] md:h-[490px] w-full rounded-[32px] overflow-hidden bg-[#142218] shadow-2xl flex flex-col justify-between p-7 md:p-12 text-[#F4F6F3]"
+        className="relative min-h-[420px] md:h-[490px] w-full rounded-[24px] md:rounded-[32px] overflow-hidden bg-[#142218] shadow-2xl flex flex-col justify-between p-5 sm:p-7 md:p-12 text-[#F4F6F3]"
       >
         <img
           ref={bannerBgRef}
           src={HERO_IMAGES.finaleMountain}
           alt="Top Mountain Resort hillside cabana in Diyatalawa"
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.68] contrast-[1.08] will-change-transform"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#142218]/92 via-[#142218]/38 to-[#142218]/55" />
@@ -432,7 +434,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-        className="relative overflow-hidden rounded-[32px] bg-[#142218] text-[#F4F6F3] px-6 py-12 md:px-12 md:py-16 shadow-2xl border border-white/10"
+        className="relative overflow-hidden rounded-[24px] md:rounded-[32px] bg-[#142218] text-[#F4F6F3] px-5 py-10 md:px-12 md:py-16 shadow-2xl border border-white/10"
       >
         {/* Ambient Pine Glow */}
         <div
@@ -443,7 +445,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
         {/* Top Brand Row */}
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10 border-b border-white/15">
           <div className="flex items-center gap-4">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#243829] border border-white/20 text-sm font-semibold tracking-widest text-[#F4F6F3]">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#243829] border border-white/20 text-sm font-semibold tracking-widest text-[#F4F6F3]">
               TM
             </span>
             <div>
@@ -515,7 +517,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
                   <button
                     type="button"
                     onClick={() => onScrollTo(item.target)}
-                    className="text-[#E6ECE6]/80 hover:text-white hover:translate-x-1 transition-all duration-200 inline-flex items-center gap-1.5"
+                    className="py-1 text-[#E6ECE6]/80 hover:text-white hover:translate-x-1 transition-all duration-200 inline-flex items-center gap-1.5"
                   >
                     {item.label}
                   </button>
@@ -535,7 +537,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
                   <button
                     type="button"
                     onClick={() => onInspectRoom(suite.id)}
-                    className="group w-full flex items-center justify-between gap-2 text-left text-[#E6ECE6]/80 hover:text-white transition-colors"
+                    className="group w-full py-1 flex items-center justify-between gap-2 text-left text-[#E6ECE6]/80 hover:text-white transition-colors"
                   >
                     <span className="group-hover:translate-x-1 transition-transform duration-200">
                       {suite.shortName}
@@ -608,11 +610,11 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({
             © {new Date().getFullYear()} Top Mountain Resort, Diyatalawa. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-4">
-            <a href="tel:+94777368264" className="hover:text-white transition-colors">
+            <a href="tel:+94777368264" className="py-1 hover:text-white transition-colors">
               +94 77 736 8264
             </a>
             <span>•</span>
-            <a href="tel:+94572227143" className="hover:text-white transition-colors">
+            <a href="tel:+94572227143" className="py-1 hover:text-white transition-colors">
               +94 57 222 7143
             </a>
             <motion.button

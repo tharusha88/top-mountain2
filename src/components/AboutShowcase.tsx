@@ -173,7 +173,7 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
     <section
       id="sanctuary"
       ref={sectionRef}
-      className="mt-5 rounded-[32px] bg-[#F7F9F6] px-5 py-14 md:px-12 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)]"
+      className="mt-5 rounded-[24px] md:rounded-[32px] bg-[#F7F9F6] px-5 py-14 md:px-12 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)]"
     >
       {/* Top Header & Section Label */}
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-12 md:mb-16">
@@ -214,11 +214,13 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
           <div
             key={card.id}
             style={{ top: `${48 + index * 16}px` }}
-            className="sticky-showcase-card sticky top-12 h-[75vh] min-h-[500px] w-full rounded-[28px] overflow-hidden shadow-2xl border border-white/30 bg-[#142218] origin-top will-change-transform"
+            className="sticky-showcase-card sticky top-12 h-[78svh] min-h-[480px] md:h-[75vh] md:min-h-[500px] w-full rounded-[28px] overflow-hidden shadow-2xl border border-white/30 bg-[#142218] origin-top will-change-transform"
           >
             <img
               src={card.image}
               alt={card.title}
+              loading="lazy"
+              decoding="async"
               className="sticky-card-img h-full w-full object-cover object-center will-change-transform"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#142218]/85 via-[#142218]/20 to-black/15" />
@@ -229,7 +231,7 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6 }}
-              className="absolute top-5 right-5 z-20 rounded-full bg-white/15 backdrop-blur-xl border border-white/25 px-3.5 py-1.5 text-[11px] font-medium tracking-[0.2em] text-[#F4F6F3] uppercase"
+              className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 rounded-full bg-white/15 backdrop-blur-xl border border-white/25 px-3 sm:px-3.5 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-[0.14em] sm:tracking-[0.2em] text-[#F4F6F3] uppercase"
             >
               0{index + 1} / 03 • {card.subtitle}
             </motion.div>
@@ -242,8 +244,12 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
                   key={spot.id}
                   style={{ left: spot.x, top: spot.y }}
                   className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
-                  onMouseEnter={() => setActiveHotspot(spot.id)}
-                  onMouseLeave={() => setActiveHotspot(null)}
+                  onPointerEnter={(e) => {
+                    if (e.pointerType === 'mouse') setActiveHotspot(spot.id);
+                  }}
+                  onPointerLeave={(e) => {
+                    if (e.pointerType === 'mouse') setActiveHotspot(null);
+                  }}
                 >
                   <motion.button
                     whileHover={{ scale: 1.07 }}
@@ -261,7 +267,9 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
 
                   {/* Tooltip */}
                   <div
-                    className={`mt-2 w-60 rounded-2xl bg-[#142218]/92 backdrop-blur-xl border border-white/20 p-3.5 text-xs text-[#F4F6F3] shadow-2xl transition-all duration-300 ${
+                    className={`absolute top-full mt-2 w-52 sm:w-60 ${
+                      parseFloat(spot.x) > 50 ? 'right-0' : 'left-0'
+                    } rounded-2xl bg-[#142218]/92 backdrop-blur-xl border border-white/20 p-3.5 text-xs text-[#F4F6F3] shadow-2xl transition-all duration-300 ${
                       isOpen
                         ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
                         : 'opacity-0 translate-y-2 scale-95 pointer-events-none'
@@ -280,7 +288,7 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute bottom-5 left-5 right-5 sm:right-auto z-20 backdrop-blur-md bg-black/40 border border-white/20 p-6 rounded-2xl max-w-sm text-[#F4F6F3] shadow-2xl"
+              className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-auto z-20 backdrop-blur-md bg-black/40 border border-white/20 p-4 sm:p-6 rounded-2xl max-w-sm text-[#F4F6F3] shadow-2xl"
             >
               <div className="flex items-center gap-1 text-[#E6ECE6]" aria-label="5 stars">
                 {[...Array(5)].map((_, i) => (
@@ -298,7 +306,7 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
                 whileTap={{ scale: 0.96 }}
                 type="button"
                 onClick={onExplore}
-                className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#F4F6F3] px-5 py-2.5 text-xs font-semibold text-[#142218]"
+                className="mt-4 sm:mt-5 inline-flex items-center gap-2 rounded-full bg-[#F4F6F3] px-5 py-3 sm:py-2.5 text-xs font-semibold text-[#142218]"
               >
                 <span>Explore</span>
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -311,12 +319,12 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
       {/* Animated Metrics Row */}
       <div
         ref={metricsRef}
-        className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 border-t border-[#142218]/10"
+        className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 pt-8 md:pt-10 border-t border-[#142218]/10"
       >
         <motion.div
           whileHover={{ y: -6 }}
           transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-          className="metric-card rounded-[24px] bg-[#E6ECE6]/70 p-7 border border-[#142218]/5 shadow-sm hover:shadow-md transition-shadow"
+          className="metric-card rounded-[24px] bg-[#E6ECE6]/70 p-5 md:p-7 border border-[#142218]/5 shadow-sm hover:shadow-md transition-shadow"
         >
           <span
             ref={acresNumRef}
@@ -332,7 +340,7 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
         <motion.div
           whileHover={{ y: -6 }}
           transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-          className="metric-card rounded-[24px] bg-[#E6ECE6]/70 p-7 border border-[#142218]/5 shadow-sm hover:shadow-md transition-shadow"
+          className="metric-card rounded-[24px] bg-[#E6ECE6]/70 p-5 md:p-7 border border-[#142218]/5 shadow-sm hover:shadow-md transition-shadow"
         >
           <span
             ref={villasNumRef}
@@ -348,7 +356,7 @@ export const AboutShowcase: React.FC<AboutShowcaseProps> = ({ onExplore }) => {
         <motion.div
           whileHover={{ y: -6 }}
           transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-          className="metric-card rounded-[24px] bg-[#E6ECE6]/70 p-7 border border-[#142218]/5 shadow-sm hover:shadow-md transition-shadow"
+          className="metric-card rounded-[24px] bg-[#E6ECE6]/70 p-5 md:p-7 border border-[#142218]/5 shadow-sm hover:shadow-md transition-shadow"
         >
           <span
             ref={ratingNumRef}

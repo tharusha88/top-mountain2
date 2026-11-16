@@ -105,10 +105,10 @@ export const ExperiencesCarousel: React.FC = () => {
     <section
       id="dining"
       ref={sectionRef}
-      className="mt-5 rounded-[32px] bg-[#F7F9F6] px-5 py-14 md:px-12 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)] overflow-hidden"
+      className="mt-5 rounded-[24px] md:rounded-[32px] bg-[#F7F9F6] px-5 py-14 md:px-12 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)] overflow-hidden"
     >
       {/* Split Header */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end mb-8 md:mb-12">
         <div className="lg:col-span-6">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
@@ -121,7 +121,7 @@ export const ExperiencesCarousel: React.FC = () => {
           </motion.span>
           <h2
             ref={titleRef}
-            className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.03em] leading-[1.08] text-[#111A14]"
+            className="text-[2.15rem] sm:text-5xl lg:text-6xl font-normal tracking-[-0.03em] leading-[1.08] text-[#111A14]"
           >
             <span className="exp-word inline-block mr-[0.22em] opacity-20">Nature</span>
             <span className="exp-word editorial-serif inline-block mr-[0.22em] opacity-20 text-[1.12em] text-[#243829]">
@@ -150,7 +150,7 @@ export const ExperiencesCarousel: React.FC = () => {
 
           <div className="flex items-center justify-between pt-1">
             <span className="text-xs uppercase tracking-[0.18em] text-[#8A9A8E]">
-              Drag or scroll horizontally
+              Swipe or drag
             </span>
             <div className="flex items-center gap-2">
               <motion.button
@@ -159,7 +159,7 @@ export const ExperiencesCarousel: React.FC = () => {
                 type="button"
                 onClick={() => scrollByAmount(-1)}
                 aria-label="Previous experience"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#142218]/15 bg-white text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
+                className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-[#142218]/15 bg-white text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" />
               </motion.button>
@@ -169,7 +169,7 @@ export const ExperiencesCarousel: React.FC = () => {
                 type="button"
                 onClick={() => scrollByAmount(1)}
                 aria-label="Next experience"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#142218]/15 bg-white text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
+                className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-[#142218]/15 bg-white text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
               >
                 <ArrowRight className="h-4 w-4" />
               </motion.button>
@@ -196,12 +196,14 @@ export const ExperiencesCarousel: React.FC = () => {
               key={item.id}
               whileHover={{ y: -8 }}
               transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-              className="experience-card snap-start shrink-0 w-[82vw] sm:w-[360px] md:w-[400px] h-[460px] rounded-[24px] overflow-hidden group relative bg-[#142218] shadow-lg hover:shadow-2xl transition-shadow duration-500"
+              className="experience-card snap-start shrink-0 w-[82vw] sm:w-[360px] md:w-[400px] h-[420px] sm:h-[460px] rounded-[24px] overflow-hidden group relative bg-[#142218] shadow-lg hover:shadow-2xl transition-shadow duration-500"
             >
               <img
                 src={item.image}
                 alt={item.title}
                 draggable={false}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#142218]/92 via-[#142218]/30 to-black/15 transition-opacity duration-500 group-hover:opacity-95" />

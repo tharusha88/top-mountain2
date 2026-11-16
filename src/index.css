@@ -13,6 +13,20 @@
   body {
     overflow-x: clip;
   }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent iOS Safari from zooming the page when a form field is focused */
+  @media (max-width: 639px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
 }
 
 @layer utilities {
@@ -142,6 +156,18 @@
 .animate-leaf-sway {
   animation: leafSway 7s ease-in-out infinite;
   transform-origin: bottom center;
+}
+
+/* Respect reduced-motion preferences for decorative loops */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ken-burns,
+  .animate-float-gentle,
+  .animate-leaf-sway,
+  .animate-mist,
+  .animate-mist-reverse,
+  .hotspot-ring {
+    animation: none !important;
+  }
 }
 
 /* 3D flip word container */

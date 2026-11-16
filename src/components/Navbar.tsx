@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, CalendarCheck, CloudFog } from 'lucide-react';
 
@@ -82,6 +82,18 @@ export const BottomFloatingDock: React.FC<{
   onOpenBooking: () => void;
 }> = ({ onScrollTo, onOpenBooking }) => {
   const [activeId, setActiveId] = useState('home');
+  const navRef = useRef<HTMLElement>(null);
+
+  // Keep the active item visible when the dock is horizontally scrollable (phones)
+  useEffect(() => {
+    const nav = navRef.current;
+    const btn = nav?.querySelector<HTMLElement>(`[data-dock-id="${activeId}"]`);
+    if (!nav || !btn || nav.scrollWidth <= nav.clientWidth) return;
+    nav.scrollTo({
+      left: btn.offsetLeft - nav.clientWidth / 2 + btn.offsetWidth / 2,
+      behavior: 'smooth',
+    });
+  }, [activeId]);
 
   useEffect(() => {
     const ids = [
@@ -114,11 +126,12 @@ export const BottomFloatingDock: React.FC<{
 
   return (
     <motion.nav
-      initial={{ y: 40, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      ref={navRef}
+      initial={{ x: '-50%', y: 40, opacity: 0 }}
+      animate={{ x: '-50%', y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
       aria-label="Primary Resort Navigation"
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 max-w-[95vw] overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden rounded-full bg-[#142218]/85 backdrop-blur-2xl border border-white/20 px-2 py-1.5 shadow-[0_20px_50px_rgba(17,26,20,0.42)]"
+      className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] sm:bottom-5 left-1/2 z-50 max-w-[calc(100vw-1.25rem)] overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden rounded-full bg-[#142218]/85 backdrop-blur-2xl border border-white/20 px-2 py-1.5 shadow-[0_20px_50px_rgba(17,26,20,0.42)]"
     >
       <div className="flex items-center gap-1.5 whitespace-nowrap">
         <ul className="relative flex items-center gap-1">
@@ -128,11 +141,12 @@ export const BottomFloatingDock: React.FC<{
               <li key={item.id} className="relative">
                 <button
                   type="button"
+                  data-dock-id={item.id}
                   onClick={() => {
                     setActiveId(item.id);
                     onScrollTo(item.id === 'experiences' ? 'experiences-track' : item.id);
                   }}
-                  className={`relative z-10 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-colors duration-300 ${
+                  className={`relative z-10 px-3 sm:px-3.5 py-2.5 sm:py-1.5 rounded-full text-xs font-medium tracking-wide transition-colors duration-300 ${
                     isActive ? 'text-[#142218]' : 'text-[#F4F6F3]/80 hover:text-[#F4F6F3]'
                   }`}
                 >

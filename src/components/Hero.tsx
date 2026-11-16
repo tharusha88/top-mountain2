@@ -234,7 +234,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
       ref={heroRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative h-[92vh] min-h-[680px] w-full rounded-[32px] overflow-hidden bg-[#142218] shadow-[0_24px_60px_rgba(20,34,24,0.22)] flex flex-col justify-between"
+      className="relative min-h-[100svh] lg:h-[92vh] lg:min-h-[680px] w-full rounded-[24px] md:rounded-[32px] overflow-hidden bg-[#142218] shadow-[0_24px_60px_rgba(20,34,24,0.22)] flex flex-col justify-between"
     >
       {/* Background Enhanced Top Mountain Resort Cabana & Lush Highland Layer */}
       <div ref={bgLayerRef} className="absolute -inset-4 z-0 will-change-transform">
@@ -303,12 +303,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
       <HeroTopBar onOpenBooking={() => onOpenBooking()} onScrollTo={onScrollTo} />
 
       {/* Center Kinetic Headline */}
-      <div className="relative z-30 mx-auto max-w-5xl px-6 text-center my-auto pt-4 pb-8">
+      <div className="relative z-30 mx-auto max-w-5xl px-5 sm:px-6 text-center my-auto pt-4 pb-6 sm:pb-8">
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur-xl border border-white/25 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.24em] text-[#F4F6F3]"
+          className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur-xl border border-white/25 px-4 py-1.5 text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.18em] sm:tracking-[0.24em] text-[#F4F6F3]"
         >
           <MapPin className="h-3.5 w-3.5 text-[#E6ECE6] animate-pulse" />
           <span>Diyatalawa • Uva Highlands, Sri Lanka</span>
@@ -316,7 +316,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
 
         <h1
           ref={headlineRef}
-          className="perspective-1000 text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-medium tracking-[-0.03em] leading-[1.04] text-[#F4F6F3] drop-shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
+          className="perspective-1000 text-[1.9rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-medium tracking-[-0.03em] leading-[1.04] text-[#F4F6F3] drop-shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
         >
           {headlineLines.map((line, lineIdx) => (
             <span key={lineIdx} className="block overflow-hidden py-0.5">
@@ -362,14 +362,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
       </div>
 
       {/* Bottom Floating Widgets Row */}
-      <div className="relative z-30 flex flex-col lg:flex-row lg:items-end justify-between gap-4 px-5 pb-16 sm:pb-8 md:px-8">
+      <div className="relative z-30 flex flex-col lg:flex-row lg:items-end justify-between gap-4 px-4 pb-24 pt-6 sm:px-5 md:px-8 lg:pb-8 lg:pt-0">
         {/* Bottom-Left Floating Mini Card: Interactive Room Quick-Switcher */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.85, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
           whileHover={{ y: -4 }}
-          className="glass-surface rounded-2xl p-3 flex items-center gap-3.5 max-w-sm text-[#F4F6F3]"
+          className="glass-surface rounded-2xl p-3 flex items-center gap-3.5 w-full max-w-sm text-[#F4F6F3]"
         >
           <button
             type="button"
@@ -415,7 +415,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
                 setSwitcherIndex((prev) => (prev - 1 + ROOMS_DATA.length) % ROOMS_DATA.length)
               }
               aria-label="Previous room"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 border border-white/20 transition-colors"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 border border-white/20 transition-colors"
             >
               <ChevronLeft className="h-4 w-4" />
             </motion.button>
@@ -425,7 +425,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
               type="button"
               onClick={() => setSwitcherIndex((prev) => (prev + 1) % ROOMS_DATA.length)}
               aria-label="Next room"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 border border-white/20 transition-colors"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 border border-white/20 transition-colors"
             >
               <ChevronRight className="h-4 w-4" />
             </motion.button>
@@ -433,14 +433,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
         </motion.div>
 
         {/* Bottom-Right Floating HUD Widgets */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3.5">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-end gap-3.5 w-full lg:w-auto">
           {/* Glass Card 1: Animated Counter */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ y: -4 }}
-            className="glass-surface rounded-2xl p-4 text-[#F4F6F3] sm:w-56 flex flex-col justify-between animate-float-gentle"
+            className="glass-surface rounded-2xl p-4 text-[#F4F6F3] sm:w-56 hidden sm:flex flex-col justify-between animate-float-gentle"
           >
             <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-[#E6ECE6]/80">
               <span>Estate Scale</span>
@@ -465,7 +465,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ y: -4 }}
-            className="relative rounded-2xl bg-[#F7F9F6]/95 backdrop-blur-xl border border-white/60 shadow-2xl p-4 text-[#111A14] sm:w-72"
+            className="relative rounded-2xl bg-[#F7F9F6]/95 backdrop-blur-xl border border-white/60 shadow-2xl p-4 text-[#111A14] w-full sm:w-72"
           >
             <div className="flex items-center gap-1.5">
               <span className="rounded-full bg-[#E6ECE6] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#243829]">
@@ -500,7 +500,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
                           type="date"
                           value={quickCheckIn}
                           onChange={(e) => setQuickCheckIn(e.target.value)}
-                          className="mt-0.5 w-full bg-white rounded-md px-1.5 py-1 text-[11px]"
+                          className="mt-0.5 w-full bg-white rounded-md px-1.5 py-1.5 text-[11px]"
                         />
                       </div>
                       <div>
@@ -523,7 +523,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
                         <button
                           type="button"
                           onClick={() => setQuickGuests(Math.max(1, quickGuests - 1))}
-                          className="h-5 w-5 rounded-full bg-white text-center font-semibold"
+                          className="h-8 w-8 sm:h-5 sm:w-5 rounded-full bg-white text-center font-semibold"
                         >
                           -
                         </button>
@@ -531,7 +531,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
                         <button
                           type="button"
                           onClick={() => setQuickGuests(Math.min(16, quickGuests + 1))}
-                          className="h-5 w-5 rounded-full bg-white text-center font-semibold"
+                          className="h-8 w-8 sm:h-5 sm:w-5 rounded-full bg-white text-center font-semibold"
                         >
                           +
                         </button>
@@ -546,7 +546,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onScrollTo, onInspect
               <button
                 type="button"
                 onClick={() => setQuickBookOpen((v) => !v)}
-                className="text-[11px] font-medium underline underline-offset-4 text-[#243829] hover:text-[#142218]"
+                className="py-2 text-[11px] font-medium underline underline-offset-4 text-[#243829] hover:text-[#142218]"
               >
                 {quickBookOpen ? 'Hide Dates' : 'Select Dates'}
               </button>

@@ -72,7 +72,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-[#142218]/65 backdrop-blur-md"
+          className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-6 bg-[#142218]/65 backdrop-blur-md"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -84,13 +84,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-[28px] bg-[#F7F9F6] text-[#111A14] border border-[#142218]/10 shadow-2xl p-6 md:p-9"
+            data-lenis-prevent
+            className="relative w-full max-w-3xl max-h-[92dvh] sm:max-h-[90vh] overflow-y-auto overscroll-contain rounded-t-[24px] rounded-b-none sm:rounded-b-[28px] md:rounded-[32px] bg-[#F7F9F6] text-[#111A14] border border-[#142218]/10 shadow-2xl p-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] md:p-9"
           >
             <button
               type="button"
               onClick={onClose}
               aria-label="Close booking modal"
-              className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#E6ECE6] text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
+              className="absolute right-4 top-4 sm:right-5 sm:top-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#E6ECE6] text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
             >
               <X className="h-4 w-4" />
             </button>
@@ -113,21 +114,21 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   <strong>LKR {totalPrice.toLocaleString()}</strong> has been queued. Our estate
                   concierge will confirm shortly via WhatsApp or phone.
                 </p>
-                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                <div className="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 text-center">
                   <a
                     href={`https://wa.me/94777368264?text=${encodeURIComponent(
                       `Hello Top Mountain Resort, I would like to book ${activeRoom.name} from ${checkIn} to ${checkOut} for ${adults} adults and ${children} children.`
                     )}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#142218] px-6 py-3 text-xs font-medium uppercase tracking-wider text-[#F4F6F3] hover:bg-[#243829] transition-colors"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#142218] px-6 py-3.5 text-xs font-medium uppercase tracking-wider text-[#F4F6F3] hover:bg-[#243829] transition-colors"
                   >
                     Fast-Track via WhatsApp
                   </a>
                   <button
                     type="button"
                     onClick={onClose}
-                    className="rounded-full border border-[#142218]/20 px-6 py-3 text-xs font-medium uppercase tracking-wider text-[#142218] hover:bg-[#E6ECE6] transition-colors"
+                    className="rounded-full border border-[#142218]/20 px-6 py-3.5 text-xs font-medium uppercase tracking-wider text-[#142218] hover:bg-[#E6ECE6] transition-colors"
                   >
                     Return to Resort
                   </button>
@@ -135,7 +136,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
+                <div className="pr-12">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E6ECE6] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-[#243829]">
                     <Sparkles className="h-3 w-3" /> Top Mountain Concierge
                   </span>
@@ -197,13 +198,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     <label className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-[#243829]">
                       <Users className="h-3.5 w-3.5" /> Guests (Max {activeRoom.maxAdults}A, {activeRoom.maxChildren}C)
                     </label>
-                    <div className="mt-2 flex items-center justify-between text-xs font-medium">
+                    <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs font-medium">
                       <div className="flex items-center gap-2">
                         <span className="text-[#8A9A8E]">Adults</span>
                         <button
                           type="button"
                           onClick={() => setAdults(Math.max(1, adults - 1))}
-                          className="flex h-6 w-6 items-center justify-center rounded-full bg-white border border-[#142218]/15"
+                          className="flex h-9 w-9 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-white border border-[#142218]/15"
                         >
                           <Minus className="h-3 w-3" />
                         </button>
@@ -211,7 +212,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         <button
                           type="button"
                           onClick={() => setAdults(Math.min(activeRoom.maxAdults, adults + 1))}
-                          className="flex h-6 w-6 items-center justify-center rounded-full bg-white border border-[#142218]/15"
+                          className="flex h-9 w-9 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-white border border-[#142218]/15"
                         >
                           <Plus className="h-3 w-3" />
                         </button>
@@ -221,7 +222,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         <button
                           type="button"
                           onClick={() => setChildren(Math.max(0, children - 1))}
-                          className="flex h-6 w-6 items-center justify-center rounded-full bg-white border border-[#142218]/15"
+                          className="flex h-9 w-9 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-white border border-[#142218]/15"
                         >
                           <Minus className="h-3 w-3" />
                         </button>
@@ -231,7 +232,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                           onClick={() =>
                             setChildren(Math.min(activeRoom.maxChildren, children + 1))
                           }
-                          className="flex h-6 w-6 items-center justify-center rounded-full bg-white border border-[#142218]/15"
+                          className="flex h-9 w-9 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-white border border-[#142218]/15"
                         >
                           <Plus className="h-3 w-3" />
                         </button>
@@ -280,7 +281,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   </div>
                   <button
                     type="submit"
-                    className="rounded-full bg-[#F4F6F3] px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#142218] hover:bg-[#E6ECE6] transition-colors"
+                    className="w-full sm:w-auto rounded-full bg-[#F4F6F3] px-7 py-4 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#142218] hover:bg-[#E6ECE6] transition-colors"
                   >
                     Confirm Stay Request
                   </button>

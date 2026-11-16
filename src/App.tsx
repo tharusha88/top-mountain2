@@ -13,6 +13,8 @@ import { BottomFloatingDock } from './components/Navbar';
 import { BookingModal } from './components/BookingModal';
 
 gsap.registerPlugin(ScrollTrigger);
+// Avoid ScrollTrigger recalculating on every mobile address-bar show/hide
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 interface BookingPrefill {
   roomId?: string;
@@ -58,6 +60,18 @@ export function App() {
     };
   }, []);
 
+  // Lock page scroll while the booking modal is open
+  useEffect(() => {
+    if (!bookingOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    lenisRef.current?.stop();
+    return () => {
+      document.body.style.overflow = prev;
+      lenisRef.current?.start();
+    };
+  }, [bookingOpen]);
+
   const handleScrollTo = (sectionId: string) => {
     const el = document.getElementById(sectionId);
     if (!el) return;
@@ -79,7 +93,7 @@ export function App() {
   };
 
   return (
-    <div className="p-3 md:p-5 bg-[#E6ECE6] min-h-screen text-[#111A14]">
+    <div className="p-2.5 md:p-5 bg-[#E6ECE6] min-h-screen text-[#111A14]">
       {/* Subtle Top Highland Scroll Progress Ribbon */}
       <motion.div
         style={{ scaleX: smoothProgress }}

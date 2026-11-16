@@ -97,7 +97,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-      className="mt-5 rounded-[32px] bg-[#F7F9F6] px-5 py-14 md:px-12 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)]"
+      className="mt-5 rounded-[24px] md:rounded-[32px] bg-[#F7F9F6] px-5 py-14 md:px-12 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)]"
     >
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
@@ -119,7 +119,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
 
       {/* Category Filter Pills & Room Selector Strip */}
       <div className="mb-8 space-y-3">
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="-mx-5 px-5 md:mx-0 md:px-0 flex flex-nowrap md:flex-wrap items-center gap-2 overflow-x-auto md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {CATEGORIES.map((cat) => {
             const active = selectedCategory === cat;
             return (
@@ -127,7 +127,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
                 key={cat}
                 type="button"
                 onClick={() => handleCategoryChange(cat)}
-                className={`relative rounded-full px-4 py-1.5 text-xs font-medium transition-colors duration-300 ${
+                className={`relative shrink-0 whitespace-nowrap rounded-full px-4 py-2 md:py-1.5 text-xs font-medium transition-colors duration-300 ${
                   active ? 'text-[#F4F6F3]' : 'bg-[#E6ECE6] text-[#243829] hover:bg-[#DCE5DC]'
                 }`}
               >
@@ -146,7 +146,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
           })}
         </div>
 
-        <motion.div layout className="flex flex-wrap items-center gap-2 pt-1">
+        <motion.div layout className="-mx-5 px-5 md:mx-0 md:px-0 flex flex-nowrap md:flex-wrap items-center gap-2 pt-1 overflow-x-auto md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {filteredRooms.map((room) => {
             const isCurrent = room.id === activeRoom.id;
             return (
@@ -157,7 +157,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
                 key={room.id}
                 type="button"
                 onClick={() => selectRoom(room.id)}
-                className={`rounded-full border px-3.5 py-1.5 text-xs transition-colors duration-300 ${
+                className={`shrink-0 whitespace-nowrap rounded-full border px-3.5 py-2 md:py-1.5 text-xs transition-colors duration-300 ${
                   isCurrent
                     ? 'border-[#142218] bg-[#243829] text-[#F4F6F3] font-medium shadow-sm'
                     : 'border-[#142218]/15 bg-white/80 text-[#111A14]/80 hover:border-[#142218]/40'
@@ -301,7 +301,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
 
         {/* Right Column (8 cols): 3 Vertical Arch/Pill-Rounded Interactive Panels */}
         <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-between">
-          <div className="h-[460px] sm:h-[520px] flex gap-3 sm:gap-4">
+          <div className="h-[420px] sm:h-[520px] flex gap-2 sm:gap-4">
             {activeRoom.panels.map((panel, idx) => {
               const isExpanded = activePanelIndex === idx;
               return (
@@ -317,13 +317,15 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
                     }
                   }}
                   aria-expanded={isExpanded}
-                  className={`relative h-full rounded-[32px] overflow-hidden text-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] focus:outline-none group ${
+                  className={`relative h-full rounded-[22px] md:rounded-[32px] overflow-hidden text-left transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] focus:outline-none group ${
                     isExpanded ? 'flex-[4]' : 'flex-[1] cursor-pointer'
                   }`}
                 >
                   <img
                     src={panel.image}
                     alt={`${activeRoom.name} — ${panel.label}`}
+                    loading="lazy"
+                    decoding="async"
                     className={`h-full w-full object-cover object-center transition-transform duration-700 ${
                       isExpanded
                         ? 'animate-ken-burns'
@@ -359,7 +361,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
                         setLightboxOpen(true);
                       }}
                       aria-label="Open fullscreen gallery view"
-                      className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/35 hover:bg-black/55 backdrop-blur-xl border border-white/25 text-[#F4F6F3] transition-colors"
+                      className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-black/35 hover:bg-black/55 backdrop-blur-xl border border-white/25 text-[#F4F6F3] transition-colors"
                     >
                       <Expand className="h-4 w-4" />
                     </motion.button>
@@ -372,7 +374,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.15 }}
-                      className="absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between gap-4"
+                      className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 z-20 flex items-end justify-between gap-4"
                     >
                       <div className="rounded-2xl bg-black/40 backdrop-blur-md border border-white/20 px-4 py-3 text-[#F4F6F3]">
                         <p className="text-[10px] uppercase tracking-[0.2em] text-[#E6ECE6]/80">
@@ -431,7 +433,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
                 type="button"
                 onClick={() => cycleRoom(-1)}
                 aria-label="Previous accommodation"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#142218]/20 bg-white text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
+                className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-[#142218]/20 bg-white text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" />
               </motion.button>
@@ -441,7 +443,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
                 type="button"
                 onClick={() => cycleRoom(1)}
                 aria-label="Next accommodation"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[#142218]/20 bg-white text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
+                className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-[#142218]/20 bg-white text-[#142218] hover:bg-[#142218] hover:text-[#F4F6F3] transition-colors"
               >
                 <ArrowRight className="h-4 w-4" />
               </motion.button>
@@ -458,7 +460,8 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setLightboxOpen(false)}
-            className="fixed inset-0 z-[110] flex items-center justify-center bg-[#142218]/90 backdrop-blur-xl p-4 md:p-8"
+            data-lenis-prevent
+            className="fixed inset-0 z-[110] flex items-center justify-center bg-[#142218]/90 backdrop-blur-xl p-3 md:p-8"
           >
             <motion.div
               initial={{ scale: 0.94, opacity: 0 }}
@@ -472,7 +475,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
                 type="button"
                 onClick={() => setLightboxOpen(false)}
                 aria-label="Close fullscreen preview"
-                className="absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-white hover:text-[#142218] transition-colors"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-white hover:text-[#142218] transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -480,7 +483,7 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
               <img
                 src={activeRoom.panels[activePanelIndex].image}
                 alt={activeRoom.panels[activePanelIndex].label}
-                className="w-full max-h-[75vh] object-cover"
+                className="w-full max-h-[60svh] sm:max-h-[75vh] object-cover"
               />
 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 bg-[#142218] text-[#F4F6F3]">
@@ -498,14 +501,16 @@ export const RoomAccordion: React.FC<RoomAccordionProps> = ({ onBookRoom, focuse
                     onClick={() =>
                       setActivePanelIndex((prev) => (prev - 1 + 3) % 3)
                     }
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 hover:bg-white/15"
+                    className="flex h-11 w-11 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/20 hover:bg-white/15"
+                    aria-label="Previous photo"
                   >
                     <ArrowLeft className="h-4 w-4" />
                   </button>
                   <button
                     type="button"
                     onClick={() => setActivePanelIndex((prev) => (prev + 1) % 3)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 hover:bg-white/15"
+                    className="flex h-11 w-11 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/20 hover:bg-white/15"
+                    aria-label="Next photo"
                   >
                     <ArrowRight className="h-4 w-4" />
                   </button>

@@ -13,10 +13,10 @@ export const Testimonials: React.FC = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-      className="mt-5 rounded-[32px] bg-[#F7F9F6] py-14 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)] overflow-hidden"
+      className="mt-5 rounded-[24px] md:rounded-[32px] bg-[#F7F9F6] py-14 md:py-20 shadow-[0_12px_40px_rgba(20,34,24,0.06)] overflow-hidden"
     >
       {/* Header */}
-      <div className="px-5 md:px-12 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div className="px-5 md:px-12 mb-8 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="max-w-3xl">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
@@ -55,7 +55,7 @@ export const Testimonials: React.FC = () => {
               key={`${review.id}-${index}`}
               whileHover={{ y: -10, scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-              className="w-[340px] shrink-0 rounded-[24px] bg-[#243829] text-[#F4F6F3] p-7 flex flex-col justify-between shadow-xl border border-white/10 cursor-default"
+              className="w-[290px] sm:w-[340px] shrink-0 rounded-[24px] bg-[#243829] text-[#F4F6F3] p-6 sm:p-7 flex flex-col justify-between shadow-xl border border-white/10 cursor-default"
             >
               <div>
                 <div className="flex items-center justify-between">
